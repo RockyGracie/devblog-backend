@@ -40,6 +40,19 @@ class PostRepository {
     });
   }
 
+  updateById(id, { author, body }) {
+    return new Promise((resolve) => {
+      const updatedPost = {
+        id,
+        author: author ? author[0].toUpperCase() + author.slice(1).toLowerCase() : author,
+        body: body ? body[0].toUpperCase() + body.slice(1) : body,
+      };
+
+      posts = posts.map((post) => (post.id === id ? updatedPost : post));
+      resolve(updatedPost);
+    });
+  }
+
   deleteById(id) {
     return new Promise((resolve) => {
       posts = posts.filter((post) => post.id !== id);
