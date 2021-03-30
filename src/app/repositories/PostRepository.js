@@ -1,6 +1,6 @@
 const { v4 } = require('uuid');
 
-const posts = [
+let posts = [
   {
     id: v4(),
     author: 'De Assis',
@@ -37,6 +37,14 @@ class PostRepository {
 
       posts.push(newPost);
       resolve(newPost);
+    });
+  }
+
+  deleteById(id) {
+    return new Promise((resolve) => {
+      posts = posts.filter((post) => post.id !== id);
+
+      resolve(posts);
     });
   }
 }

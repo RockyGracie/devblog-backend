@@ -31,6 +31,18 @@ class PostController {
 
     response.json(newPost);
   }
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const postExists = await PostRepository.findById(id);
+
+    if (!postExists) return response.status(400).json({ error: 'Post not found.' });
+
+    await PostRepository.deleteById(id);
+
+    response.sendStatus(204);
+  }
 }
 
 module.exports = new PostController();
