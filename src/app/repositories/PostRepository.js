@@ -26,6 +26,19 @@ class PostRepository {
   findById(id) {
     return new Promise((resolve) => resolve(posts.find((post) => post.id === id)));
   }
+
+  create({ author, body }) {
+    return new Promise((resolve) => {
+      const newPost = {
+        id: v4(),
+        author: author[0].toUpperCase() + author.slice(1).toLowerCase(),
+        body: body[0].toUpperCase() + body.slice(1),
+      };
+
+      posts.push(newPost);
+      resolve(newPost);
+    });
+  }
 }
 
 module.exports = new PostRepository();
