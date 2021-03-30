@@ -1,9 +1,9 @@
 const express = require('express');
+const routes = require('./routes');
 
 const app = express();
 
-app.get('/posts', (request, response) => {
-  response.send('Server is working');
-});
+app.use(routes);
+app.use(express.json());
 
 app.listen(3000, () => console.log('Server started at localhost:3000'));
