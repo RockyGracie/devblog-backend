@@ -14,5 +14,6 @@ module.exports = {
     'no-console': 'off',
     'no-unused-expressions': 'off',
     'class-methods-use-this': 'off',
+    'consistent-return': 'off',
   },
 };

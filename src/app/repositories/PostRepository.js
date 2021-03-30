@@ -22,6 +22,10 @@ class PostRepository {
   findAll() {
     return new Promise((resolve) => resolve(posts));
   }
+
+  findById(id) {
+    return new Promise((resolve) => resolve(posts.find((post) => post.id === id)));
+  }
 }
 
 module.exports = new PostRepository();
