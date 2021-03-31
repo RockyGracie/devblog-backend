@@ -5,6 +5,8 @@ class CategoryController {
     const { orderBy } = request.query;
     const categories = await CategoryRepository.findAll(orderBy);
 
+    if (categories.length === 0) return response.status(400).json({ no_category: 'There is no category to show. Add one.' });
+
     response.json(categories);
   }
 
@@ -30,12 +32,31 @@ class CategoryController {
     response.json(newCategory);
   }
 
-  update() {
+  async update(request, response) {
+    const { id } = request.params;
+    const { name } = request.body;
 
+    const categoryExists = await CategoryRepository.findById(id);
+
+    if (!categoryExists) return response.status(404).json({ error: 'Category not found.' });
+
+    if (!name) return response.status(400).json({ error: 'Name is required' });
+
+    const updatedCategory = await CategoryRepository.updateById(id, { name });
+
+    response.json(updatedCategory);
   }
 
-  delete() {
+  async delete(request, response) {
+    const { id } = request.params;
 
+    const categoryExists = await CategoryRepository.findById(id);
+
+    if (!categoryExists) return response.status(404).json({ error: 'Category not found.' });
+
+    await CategoryRepository.deleteById(id);
+
+    response.sendStatus(204);
   }
 }
 
