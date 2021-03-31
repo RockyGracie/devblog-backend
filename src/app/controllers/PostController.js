@@ -2,7 +2,8 @@ const PostRepository = require('../repositories/PostRepository');
 
 class PostController {
   async index(request, response) {
-    const posts = await PostRepository.findAll();
+    const { orderBy } = request.query;
+    const posts = await PostRepository.findAll(orderBy);
 
     response.json(posts);
   }

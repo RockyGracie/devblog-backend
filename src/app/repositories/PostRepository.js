@@ -1,8 +1,13 @@
 const db = require('../../database/index');
 
 class PostRepository {
-  async findAll() {
-    const rows = await db.query('SELECT * FROM posts');
+  async findAll(orderBy = 'ASC') {
+    const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+    const rows = await db.query(`
+      SELECT *
+      FROM posts
+      ORDER BY title ${direction}
+    `);
 
     return rows;
   }
@@ -20,23 +25,33 @@ class PostRepository {
       INSERT INTO posts(title, author, body, category_id)
       VALUES ($1, $2, $3, $4)
       RETURNING *
-    `, [title, author, body, category_id]);
+    `, [
+      title[0].toUpperCase() + title.slice(1).toLowerCase(),
+      author[0].toUpperCase() + author.slice(1).toLowerCase(),
+      body[0].toUpperCase() + body.slice(1).toLowerCase(),
+      category_id,
+    ]);
 
     return row;
   }
 
-  updateById(id, { title, author, body }) {
-    return new Promise((resolve) => {
-      const updatedPost = {
-        id,
-        title: title[0].toUpperCase() + title.slice(1).toLowerCase(),
-        author: author ? author[0].toUpperCase() + author.slice(1).toLowerCase() : author,
-        body: body ? body[0].toUpperCase() + body.slice(1) : body,
-      };
+  async updateById(id, {
+    title, author, body, category_id,
+  }) {
+    const [row] = await db.query(`
+      UPDATE posts
+      SET title = $1, author = $2, body = $3, category_id = $4
+      WHERE id = $5
+      RETURNING *
+    `, [
+      title[0].toUpperCase() + title.slice(1).toLowerCase(),
+      author[0].toUpperCase() + author.slice(1).toLowerCase(),
+      body[0].toUpperCase() + body.slice(1).toLowerCase(),
+      category_id,
+      id,
+    ]);
 
-      posts = posts.map((post) => (post.id === id ? updatedPost : post));
-      resolve(updatedPost);
-    });
+    return row;
   }
 
   async deleteById(id) {
