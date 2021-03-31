@@ -19,7 +19,9 @@ class PostController {
   }
 
   async store(request, response) {
-    const { title, author, body } = request.body;
+    const {
+      title, author, body, category_id,
+    } = request.body;
 
     if (!title && !author && !body) return response.status(400).json({ error: 'Post author and body are required.' });
 
@@ -29,7 +31,9 @@ class PostController {
 
     if (!body) return response.status(400).json({ error: 'Post body is required.' });
 
-    const newPost = await PostRepository.create({ title, author, body });
+    const newPost = await PostRepository.create({
+      title, author, body, category_id,
+    });
 
     response.json(newPost);
   }
