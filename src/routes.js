@@ -11,10 +11,10 @@ router.post('/posts', PostController.store);
 router.put('/posts/:id', PostController.update);
 router.delete('/posts/:id', PostController.delete);
 
-router.get('/posts', CategoryController.index);
-router.get('/posts/:id', CategoryController.show);
-router.post('/posts', CategoryController.store);
-router.put('/posts/:id', CategoryController.update);
-router.delete('/posts/:id', CategoryController.delete);
+router.get('/categories', CategoryController.index);
+router.get('/categories/:id', CategoryController.show);
+router.post('/categories', CategoryController.store);
+router.put('/categories/:id', CategoryController.update);
+router.delete('/categories/:id', CategoryController.delete);
 
 module.exports = router;
