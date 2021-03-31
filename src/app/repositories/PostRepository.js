@@ -39,12 +39,10 @@ class PostRepository {
     });
   }
 
-  deleteById(id) {
-    return new Promise((resolve) => {
-      posts = posts.filter((post) => post.id !== id);
+  async deleteById(id) {
+    const deleteOp = await db.query('DELETE FROM posts WHERE id = $1', [id]);
 
-      resolve(posts);
-    });
+    return deleteOp;
   }
 }
 
