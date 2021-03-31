@@ -4,16 +4,22 @@ class PostRepository {
   async findAll(orderBy = 'ASC') {
     const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     const rows = await db.query(`
-      SELECT *
+      SELECT posts.*, categories.name AS category
       FROM posts
-      ORDER BY title ${direction}
+      LEFT JOIN categories ON categories.id = posts.category_id
+      ORDER BY posts.title ${direction}
     `);
 
     return rows;
   }
 
   async findById(id) {
-    const [row] = await db.query('SELECT * FROM posts WHERE id = $1', [id]);
+    const [row] = await db.query(`
+      SELECT posts.*, categories.name AS category
+      FROM posts
+      LEFT JOIN categories ON categories.id = posts.category_id
+      WHERE posts.id = $1
+    `, [id]);
 
     return row;
   }
