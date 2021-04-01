@@ -13,7 +13,7 @@ To make the integration between front-end and back-end;
 To create the back-end server;
 
 - [PostgreSQL](https://www.postgresql.org/) <br />
-As the data source to store the posts of the blog.
+As the data base to store the posts of the blog.
 
 - [Docker](https://www.docker.com/) <br />
-As the environment to host the database.
+As the environment to host the data base.
