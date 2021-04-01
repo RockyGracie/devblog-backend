@@ -1,13 +1,10 @@
-﻿# DevBlog Back-End
+# DevBlog Back-End
  
 ## Back-End of the DevBlog Fictional WebApp
 
 ### 🛠 Techs
 
 #### Techs used in the application construction:
-
-- [ReactJS](https://pt-br.reactjs.org/) <br />
-To make the integration between front-end and back-end;
 
 - [ExpressJS](https://expressjs.com/) <br />
 To create the back-end server;
