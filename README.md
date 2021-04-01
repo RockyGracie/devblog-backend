@@ -4,13 +4,16 @@
 
 ### 🛠 Techs
 
-The following techs were used in the application construction:
-ReactJS to make the integration between front-end and back-end;
-ExpressJS to create the back-end server;
-PostgreSQL as the data source to store the posts of the blog.
-Docker as the environment to host the database.
+#### Techs used in the application construction:
 
-- [ReactJS](https://pt-br.reactjs.org/)
-- [ExpressJS](https://expressjs.com/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Docker](https://www.docker.com/)
+- [ReactJS](https://pt-br.reactjs.org/) <br />
+To make the integration between front-end and back-end;
+
+- [ExpressJS](https://expressjs.com/) <br />
+To create the back-end server;
+
+- [PostgreSQL](https://www.postgresql.org/) <br />
+As the data source to store the posts of the blog.
+
+- [Docker](https://www.docker.com/) <br />
+As the environment to host the database.
